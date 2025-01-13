@@ -1,0 +1,323 @@
+[
+    {
+        "id": "cadb56eb614dee7a",
+        "type": "tab",
+        "label": "backend",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "3eee90094d5f0298",
+        "type": "http in",
+        "z": "cadb56eb614dee7a",
+        "name": "SalvarRemedio",
+        "url": "/remedios",
+        "method": "post",
+        "upload": true,
+        "swaggerDoc": "",
+        "x": 160,
+        "y": 340,
+        "wires": [
+            [
+                "145ceb6c5c7223c4"
+            ]
+        ]
+    },
+    {
+        "id": "701387a35a86f63a",
+        "type": "http in",
+        "z": "cadb56eb614dee7a",
+        "name": "",
+        "url": "/remedios",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 160,
+        "y": 300,
+        "wires": [
+            [
+                "5e8934ba96fdb494"
+            ]
+        ]
+    },
+    {
+        "id": "5e8934ba96fdb494",
+        "type": "cloudantplus in",
+        "z": "cadb56eb614dee7a",
+        "name": "remedios db",
+        "cloudant": "81af04c212b4e128",
+        "database": "remedios",
+        "service": "_ext_",
+        "search": "_all_",
+        "design": "",
+        "index": "",
+        "x": 430,
+        "y": 300,
+        "wires": [
+            [
+                "864a85d95a363eb3",
+                "4d06e04e03b9a83b"
+            ]
+        ]
+    },
+    {
+        "id": "864a85d95a363eb3",
+        "type": "http response",
+        "z": "cadb56eb614dee7a",
+        "name": "Remedios",
+        "statusCode": "200",
+        "headers": {},
+        "x": 700,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "145ceb6c5c7223c4",
+        "type": "cloudantplus out",
+        "z": "cadb56eb614dee7a",
+        "name": "insert",
+        "cloudant": "81af04c212b4e128",
+        "database": "remedios",
+        "service": "_ext_",
+        "payonly": true,
+        "operation": "insert",
+        "x": 450,
+        "y": 340,
+        "wires": [
+            [
+                "864a85d95a363eb3"
+            ]
+        ]
+    },
+    {
+        "id": "4d06e04e03b9a83b",
+        "type": "debug",
+        "z": "cadb56eb614dee7a",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 700,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "beab6d92465cbe24",
+        "type": "cloudantplus out",
+        "z": "cadb56eb614dee7a",
+        "name": "insert",
+        "cloudant": "81af04c212b4e128",
+        "database": "remedios",
+        "service": "_ext_",
+        "payonly": true,
+        "operation": "insert",
+        "x": 450,
+        "y": 400,
+        "wires": [
+            [
+                "864a85d95a363eb3"
+            ]
+        ]
+    },
+    {
+        "id": "3bd17e230eb6d5fe",
+        "type": "http in",
+        "z": "cadb56eb614dee7a",
+        "name": "Update",
+        "url": "/remedios",
+        "method": "put",
+        "upload": true,
+        "swaggerDoc": "",
+        "x": 150,
+        "y": 400,
+        "wires": [
+            [
+                "beab6d92465cbe24"
+            ]
+        ]
+    },
+    {
+        "id": "c1c84128dd73593e",
+        "type": "http response",
+        "z": "cadb56eb614dee7a",
+        "name": "Gaveta",
+        "statusCode": "200",
+        "headers": {},
+        "x": 740,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "920d723a69bc84a4",
+        "type": "http in",
+        "z": "cadb56eb614dee7a",
+        "name": "Ligar Gavetas",
+        "url": "/ligarGaveta",
+        "method": "post",
+        "upload": true,
+        "swaggerDoc": "",
+        "x": 150,
+        "y": 140,
+        "wires": [
+            [
+                "3de68ffd61dc4e6f"
+            ]
+        ]
+    },
+    {
+        "id": "ff5b4941d812378c",
+        "type": "http in",
+        "z": "cadb56eb614dee7a",
+        "name": "Ativar Gaveta",
+        "url": "/ativarGaveta",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 170,
+        "y": 80,
+        "wires": [
+            [
+                "fb7b2b41319788e2"
+            ]
+        ]
+    },
+    {
+        "id": "fb7b2b41319788e2",
+        "type": "function",
+        "z": "cadb56eb614dee7a",
+        "name": "function 4",
+        "func": "// Suponha que a carga útil do POST contenha um JSON com campos \"gavetas\" e \"ligar\"\nlet ligar = msg.payload.ligar; // Exemplo: { \"ligar\": true }\n\n// Criar um novo payload para enviar ao ESP8266\nmsg.payload = JSON.stringify({ ligar: ligar });\n\nmsg.headers = { 'Content-Type': 'application/json' }; // Definir o tipo de conteúdo\n\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 80,
+        "wires": [
+            [
+                "13122c6bec2e693c"
+            ]
+        ]
+    },
+    {
+        "id": "3de68ffd61dc4e6f",
+        "type": "function",
+        "z": "cadb56eb614dee7a",
+        "name": "function 5",
+        "func": "// Suponha que a carga útil do POST contenha um JSON com um campo \"gavetas\"\nlet payload = msg.payload.gavetas; // Exemplo: { \"gavetas\": [0, 1] }\n\n// Criar um novo payload para enviar ao ESP8266\nmsg.payload = JSON.stringify({ gavetas: payload });\nmsg.headers = { 'Content-Type': 'application/json' }; // Definir o tipo de conteúdo\n\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 140,
+        "wires": [
+            [
+                "495d33f3a43c9c36"
+            ]
+        ]
+    },
+    {
+        "id": "13122c6bec2e693c",
+        "type": "http request",
+        "z": "cadb56eb614dee7a",
+        "name": "ESP",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://10.87.154.52/ativarGaveta",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 510,
+        "y": 80,
+        "wires": [
+            [
+                "c1c84128dd73593e"
+            ]
+        ]
+    },
+    {
+        "id": "495d33f3a43c9c36",
+        "type": "http request",
+        "z": "cadb56eb614dee7a",
+        "name": "ESP",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://10.87.154.52/ligarGaveta",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 510,
+        "y": 140,
+        "wires": [
+            [
+                "c1c84128dd73593e"
+            ]
+        ]
+    },
+    {
+        "id": "0bf89dc9236c307f",
+        "type": "http in",
+        "z": "cadb56eb614dee7a",
+        "name": "Gavetas State",
+        "url": "/estadoGaveta",
+        "method": "get",
+        "upload": true,
+        "swaggerDoc": "",
+        "x": 150,
+        "y": 200,
+        "wires": [
+            [
+                "20c6363fda98be5c"
+            ]
+        ]
+    },
+    {
+        "id": "20c6363fda98be5c",
+        "type": "http request",
+        "z": "cadb56eb614dee7a",
+        "name": "ESP",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://10.87.154.52/estadoGaveta",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 510,
+        "y": 200,
+        "wires": [
+            [
+                "c1c84128dd73593e"
+            ]
+        ]
+    },
+    {
+        "id": "81af04c212b4e128",
+        "type": "cloudantplus",
+        "host": "https://8685b21f-dcdc-4864-a9bc-84e5121ccc12-bluemix.cloudantnosqldb.appdomain.cloud",
+        "name": "BORACARAI",
+        "useapikey": true
+    }
+]

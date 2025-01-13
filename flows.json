@@ -1,0 +1,19 @@
+[
+    {
+        "id": "3eee90094d5f0298",
+        "type": "http in",
+        "z": "cadb56eb614dee7a",
+        "name": "SalvarRemedio",
+        "url": "/remedios",
+        "method": "post",
+        "upload": true,
+        "swaggerDoc": "",
+        "x": 160,
+        "y": 340,
+        "wires": [
+            [
+                "145ceb6c5c7223c4"
+            ]
+        ]
+    }
+]
