@@ -10,3 +10,6 @@ Nosso time (Aurelio Ribeiro, Alysson de Jesus Alves e Gabrielle) desenvolveu uma
 - Cloudant para armazenar com segurança os dados dos pacientes
 
 Nosso objetivo foi melhorar a qualidade de vida das pessoas, oferecendo uma solução simples e eficaz para a gestão de tratamentos médicos. 💡📱
+
+https://github.com/user-attachments/assets/b08c0f82-169b-4eb8-a5d3-0ca261348b61
+
